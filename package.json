@@ -1,0 +1,30 @@
+{
+  "name": "zy",
+  "version": "0.0.1",
+  "description": "short alphanumeric datetime format",
+  "type": "module",
+  "exports": "./src/zy.mjs",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LiviaMedeiros/zy.git"
+  },
+  "keywords": [
+    "DateTime",
+    "Temporal",
+    "Timestamp"
+  ],
+  "author": {
+    "name": "LiviaMedeiros",
+    "email": "livia@cirno.name",
+    "url": "https://github.com/LiviaMedeiros"
+  },
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "/dev/null"
+  },
+  "homepage": "https://github.com/LiviaMedeiros/zy#readme"
+}
