@@ -1,12 +1,14 @@
 {
   "name": "zy",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "short alphanumeric datetime format",
   "type": "module",
   "exports": "./src/zy.mjs",
   "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "echo \"Error: linting is not supported\" && exit 1",
+    "build": "uglifyjs --comments /^!/ --verbose --warn <src/zy.mjs >dist/zy.mjs"
   },
   "repository": {
     "type": "git",
