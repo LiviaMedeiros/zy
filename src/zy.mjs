@@ -138,14 +138,18 @@ export class zy {
   }
 
 
-  static#toZonedDateTime($ = this.#splitZY(this.#returnNow())) {
-    return Temporal.ZonedDateTime.from({
-      timeZone:this.#TZ,...Object.fromEntries(Object.entries($).map(
-      ([z,y])=>[z,z==='year'?this.#NUMS[y[0]]*60+this.#NUMS[y[1]]:this.#NUMS[y]]))
-    });
+  static#toObject($ = this.#returnNow()) {
+    return Object.fromEntries(Object.entries(this.#splitZY($).groups).map(
+      ([z,y])=>[z,z==='year'?this.#NUMS[y[0]]*60+this.#NUMS[y[1]]:this.#NUMS[y]]));
+  }
+  static toObject($ = this.#returnNow()) {
+    return { __proto__: null, ...this.#toObject($) };
+  }
+  static#toZonedDateTime($ = this.#returnNow()) {
+    return Temporal.ZonedDateTime.from({timeZone:this.#TZ,...this.#toObject($)});
   }
   static toZonedDateTime($ = this.#returnNow()) {
-    return this.#toZonedDateTime(this.#splitZY($).groups);
+    return this.#toZonedDateTime($);
   }
   static toInstant($ = this.#returnNow()) {
     return this.toZonedDateTime($).toInstant();
@@ -164,9 +168,6 @@ export class zy {
   }
   static toNanoseconds($ = this.#returnNow()) {
     return this.toZonedDateTime($).epochNanoseconds;
-  }
-  static toObject($ = this.#returnNow()) {
-    return this.#splitZY($).groups;
   }
 
 
