@@ -1,9 +1,12 @@
 {
   "name": "zy",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "short alphanumeric datetime format",
   "type": "module",
   "exports": "./src/zy.mjs",
+  "bin": {
+    "zy": "bin/cli.mjs"
+  },
   "private": true,
   "scripts": {
     "test": "node --test",
