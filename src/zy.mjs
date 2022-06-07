@@ -15,6 +15,8 @@ export class zy {
   static#MAX_string = '3599-12-31T23:59:59.999999999+0000';
   static#MIN_Instant = Temporal.Instant.from(this.#MIN_string);
   static#MAX_Instant = Temporal.Instant.from(this.#MAX_string);
+  static#MIN_ZonedDateTime = this.#MIN_Instant.toZonedDateTimeISO('UTC');
+  static#MAX_ZonedDateTime = this.#MAX_Instant.toZonedDateTimeISO('UTC');
   static#MIN_Date = new Date(this.#MIN_string);
   static#MAX_Date = new Date(this.#MAX_string);
   static#MIN_bigint = this.#MIN_Instant.epochMicroseconds;
@@ -32,7 +34,7 @@ export class zy {
       do z=this.#CHARS[y%60]+z;while(y=0|y/60);return z;},'');
   }
   static fromZonedDateTime($ = Temporal.Now.zonedDateTimeISO(this.#TZ)) {
-    return this.#fromZonedDateTime(this.#validZonedDateTimeInstance($));
+    return this.#fromZonedDateTime(this.validZonedDateTime($));
   }
   static#fromDate($ = new Date) {
     return ['Seconds','Minutes','Hours','Date','Month','FullYear'].reduce((z,y)=>{y=(y==='Month')+$['getUTC'+y]();
@@ -63,17 +65,26 @@ export class zy {
   static validInstant($) {
     return this.#validInstantRange(this.#validInstantInstance($));
   }
+  static#validZonedDateTimeRange($) {
+    if (Temporal.ZonedDateTime.compare(this.#MIN_ZonedDateTime, $) <= 0
+     && Temporal.ZonedDateTime.compare(this.#MAX_ZonedDateTime, $) >= 0
+    ) return $;
+    throw new RangeError('Invalid ZonedDateTime Range');
+  }
   static#validZonedDateTimeInstance($) {
     if ($ instanceof Temporal.ZonedDateTime) return $;
     throw new TypeError('Invalid ZonedDateTime Instance');
   }
-  static#validDateInstance($) {
-    if ($ instanceof Date) return $;
-    throw new TypeError('Invalid Date Instance');
+  static validZonedDateTime($) {
+    return this.#validZonedDateTimeRange(this.#validZonedDateTimeInstance($));
   }
   static#validDateRange($) {
     if (this.#MIN_Date <=$&&$<= this.#MAX_Date) return $;
     throw new RangeError('Invalid Date Range');
+  }
+  static#validDateInstance($) {
+    if ($ instanceof Date) return $;
+    throw new TypeError('Invalid Date Instance');
   }
   static validDate($) {
     return this.#validDateRange(this.#validDateInstance($));
@@ -85,7 +96,7 @@ export class zy {
   }
 
   static#fromInstant($) {
-    return this.fromZonedDateTime(this.#validInstantRange($).toZonedDateTimeISO(this.#TZ));
+    return this.#fromZonedDateTime(this.#validInstantRange($).toZonedDateTimeISO(this.#TZ));
   }
   static fromInstant($ = Temporal.Now.instant()) {
     return this.#fromInstant(this.#validInstantInstance($));
