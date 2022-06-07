@@ -120,10 +120,14 @@ export class zy {
   }
 
   static fromNumber($ = Temporal.Now.instant().epochMilliseconds) {
-    return (this.#MIN_number <$&&$< this.#MAX_number ? this.fromSeconds : this.fromMilliseconds)($);
+    return this.#MIN_number <$&&$< this.#MAX_number
+      ? this.fromSeconds($)
+      : this.fromMilliseconds($);
   }
   static fromBigInt($ = Temporal.Now.instant().epochNanoseconds) {
-    return (this.#MIN_bigint <$&&$< this.#MAX_bigint ? this.fromMicroseconds : this.fromNanoseconds)($);
+    return this.#MIN_bigint <$&&$< this.#MAX_bigint
+      ? this.fromMicroseconds($)
+      : this.fromNanoseconds($);
   }
   static fromInteger($ = Temporal.Now.instant().epochNanoseconds) {
     switch (typeof $) {
