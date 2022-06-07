@@ -1,6 +1,6 @@
 {
   "name": "@liviamedeiros/zy",
-  "version": "0.0.10",
+  "version": "0.1.0",
   "description": "short alphanumeric datetime format",
   "type": "module",
   "exports": "./src/zy.mjs",
