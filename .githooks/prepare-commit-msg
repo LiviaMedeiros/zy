@@ -1,0 +1,6 @@
+#!/bin/sh
+case "${2},${3}" in
+ ,|template,)
+  sed -i "1s/^/$(zy) /" "${1}" ;;
+ *) ;;
+esac
