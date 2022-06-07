@@ -114,11 +114,11 @@ test('toZonedDateTime method', t => {
 test('toInstant method', t => {
   wrap((ż, ẏ) => {
     assert.throws(
-      () => zy.toZonedDateTime(`${ż}gwak${ẏ}`),
+      () => zy.toInstant(`${ż}gwak${ẏ}`),
       TypeError
     );
     assert.throws(
-      () => zy.toZonedDateTime(`${ż}1010Pxx${ẏ}`),
+      () => zy.toInstant(`${ż}1010Pxx${ẏ}`),
       RangeError
     );
     assert.strictEqual(
