@@ -1,3 +1,6 @@
+[![zy](https://zy.puella-care.workers.dev/badge.svg)](https://zy.puella-care.workers.dev/now)
+[![npm](https://img.shields.io/npm/v/@liviamedeiros/zy.svg)](https://npmjs.com/package/@liviamedeiros/zy)
+
 # zy
 
 `zy` is a compact alphanumeric datetime format. This repository contains a basic JavaScript implementation for it.
